@@ -26,37 +26,10 @@ def parse_opts():
         'Number of classes (depressed vs controls as default)'
     )
     parser.add_argument(
-        '--sa_size3D',
+        '--image_size3D',
         default=(45, 54, 45),
         type=int,
-        help='Height and width of inputs')
-    parser.add_argument(
-        '--sample_duration',
-        default=16,
-        type=int,
-        help='Temporal duration of inputs')
-    parser.add_argument(
-        '--initial_scale',
-        default=1.0,
-        type=float,
-        help='Initial scale for multiscale cropping')
-    parser.add_argument(
-        '--n_scales',
-        default=5,
-        type=int,
-        help='Number of scales for multiscale cropping')
-    parser.add_argument(
-        '--scale_step',
-        default=0.84089641525,
-        type=float,
-        help='Scale step for multiscale cropping')
-    parser.add_argument(
-        '--train_crop',
-        default='corner',
-        type=str,
-        help=
-        'Spatial cropping method in training. random is uniform. corner is selection from 4 corners and 1 center.  (random | corner | center)'
-    )
+        help='x-, y- and z- dimensions')
     parser.add_argument(
         '--learning_rate',
         default=0.1,

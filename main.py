@@ -17,9 +17,7 @@ import test
 
 if __name__ == '__main__':
     opt = parse_opts()
-    if opt.root_path != '':
-        if opt.resume_path:
-            opt.resume_path = os.path.join(opt.root_path, opt.resume_path)
+    opt.resume_path = os.path.join(opt.root_path, opt.resume_path)
 
     opt.arch = '{}-{}'.format(opt.model, opt.model_depth)
     print(opt)
