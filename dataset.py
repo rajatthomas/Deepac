@@ -1,6 +1,7 @@
 from torch.utils.data import Dataset
 import os.path as osp
 import numpy as np
+import torch
 
 class PAC_data(Dataset):
 
@@ -30,8 +31,16 @@ class PAC_data(Dataset):
                     pdb.set_trace()
                 data[i_subj] = mask[..., np.newaxis] * (data_subj - mean_subj) / std_subj
 
-        self.data = data
-        self.labels = all_data[split]
+        self.data = torch.from_numpy(data)
+
+        if split == 'train_3d':
+            y_split = 'y_train'
+        if split == 'valid_3d':
+            y_split = 'y_valid'
+        if split == 'test_3d':
+            y_split = 'y_test'
+
+        self.labels = torch.from_numpy(all_data[y_split])
 
     def __len__(self):
         return self.data.shape[0]
