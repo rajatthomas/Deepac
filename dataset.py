@@ -19,7 +19,7 @@ class PAC_data(Dataset):
 
         if opt.standardize:
 
-            mask = all_data['mask_2d'].reshape(data.shape[1:])
+            mask = all_data['mask_3d'].reshape(data.shape[1:])
 
             n_subj = data.shape[0]
             for i_subj in range(n_subj):
