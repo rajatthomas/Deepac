@@ -112,7 +112,6 @@ class ResNet(nn.Module):
                  block,
                  layers,
                  sample_size,
-                 sample_duration,
                  shortcut_type='B',
                  num_classes=2):
         self.inplanes = 64

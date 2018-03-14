@@ -12,14 +12,14 @@ class PAC_data(Dataset):
         :param split: train | val | test
         :param transform: NotImplemented
         """
-        data_file = osp.join(opt.root_dir, opt.data_file)
+        data_file = osp.join(opt.root_path, opt.data_file)
         all_data = np.load(data_file)
 
         data = all_data[split]
 
         if opt.standardize:
 
-            mask = data['mask_2d'].reshape(data.shape[1:])
+            mask = all_data['mask_2d'].reshape(data.shape[1:])
 
             n_subj = data.shape[0]
             for i_subj in range(n_subj):
