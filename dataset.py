@@ -19,17 +19,17 @@ class PAC_data(Dataset):
 
         if opt.standardize:
 
-            mask = all_data['mask_3d'].reshape(data.shape[1:])
+            mask = all_data['mask_3d']
 
             n_subj = data.shape[0]
             for i_subj in range(n_subj):
                 data_subj = data[i_subj]
-                mean_subj = data_subj[mask, :].mean(axis=0)
-                std_subj = data_subj[mask, :].std(axis=0)
+                mean_subj = data_subj[mask].mean(axis=0)
+                std_subj = data_subj[mask].std(axis=0)
                 if np.any(std_subj == 0) or np.any(np.isnan(mean_subj)) or np.any(np.isnan(std_subj)):
                     import pdb;
                     pdb.set_trace()
-                data[i_subj] = mask[..., np.newaxis] * (data_subj - mean_subj) / std_subj
+                data[i_subj] = mask * (data_subj - mean_subj) / std_subj
 
         self.data = torch.from_numpy(data)
 
