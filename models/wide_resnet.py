@@ -81,11 +81,11 @@ class WideResNet(nn.Module):
                  sample_duration,
                  k=1,
                  shortcut_type='B',
-                 num_classes=400):
+                 num_classes=2):
         self.inplanes = 64
         super(WideResNet, self).__init__()
         self.conv1 = nn.Conv3d(
-            3,
+            1,
             64,
             kernel_size=7,
             stride=(1, 2, 2),

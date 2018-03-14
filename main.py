@@ -61,6 +61,8 @@ if __name__ == '__main__':
         scheduler = lr_scheduler.ReduceLROnPlateau(
             optimizer, 'min', patience=opt.lr_patience)
 
+    import pdb; pdb.set_trace()
+
     if not opt.no_val:
         validation_data = get_data_set(opt, split='valid_3d')
         val_loader = DataLoader(

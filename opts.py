@@ -26,10 +26,10 @@ def parse_opts():
         'Number of classes (depressed vs controls as default)'
     )
     parser.add_argument(
-        '--image_size3D',
+        '--image_size',
         default=(45, 54, 45),
         type=int,
-        help='x-, y- and z- dimensions')
+        help='tuple of x-, y- and z- dimensions, e.g., (109, 91, 109)')
     parser.add_argument(
         '--learning_rate',
         default=0.1,
@@ -41,16 +41,6 @@ def parse_opts():
         '--dampening', default=0.9, type=float, help='dampening of SGD')
     parser.add_argument(
         '--weight_decay', default=1e-3, type=float, help='Weight Decay')
-    parser.add_argument(
-        '--no_mean_norm',
-        action='store_true',
-        help='If true, inputs are not normalized by mean.')
-    parser.set_defaults(no_mean_norm=False)
-    parser.add_argument(
-        '--std_norm',
-        action='store_true',
-        help='If true, inputs are normalized by standard deviation.')
-    parser.set_defaults(std_norm=False)
     parser.add_argument(
         '--nesterov', action='store_true', help='Nesterov momentum')
     parser.set_defaults(nesterov=False)
@@ -90,11 +80,6 @@ def parse_opts():
         type=str,
         help='Save data (.pth) of previous training')
     parser.add_argument(
-        '--ft_begin_index',
-        default=0,
-        type=int,
-        help='Begin block index of fine-tuning')
-    parser.add_argument(
         '--no_train',
         action='store_true',
         help='If true, training is not performed.')
@@ -112,16 +97,6 @@ def parse_opts():
         default='val',
         type=str,
         help='Used subset in test (val | test)')
-    parser.add_argument(
-        '--scale_in_test',
-        default=1.0,
-        type=float,
-        help='Spatial scale in test')
-    parser.add_argument(
-        '--crop_position_in_test',
-        default='c',
-        type=str,
-        help='Cropping method (c | tl | tr | bl | br) in test')
     parser.add_argument(
         '--no_softmax_in_test',
         action='store_true',

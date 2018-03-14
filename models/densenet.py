@@ -148,7 +148,7 @@ class DenseNet(nn.Module):
                  num_init_features=64,
                  bn_size=4,
                  drop_rate=0,
-                 num_classes=1000):
+                 num_classes=2):
 
         super(DenseNet, self).__init__()
 
@@ -160,7 +160,7 @@ class DenseNet(nn.Module):
             OrderedDict([
                 ('conv0',
                  nn.Conv3d(
-                     3,
+                     1,
                      num_init_features,
                      kernel_size=7,
                      stride=(1, 2, 2),
