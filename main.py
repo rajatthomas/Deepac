@@ -33,6 +33,7 @@ if __name__ == '__main__':
         criterion = criterion.cuda()
 
     if not opt.no_train:
+        print('Setting up train_loader')
         training_data = get_data_set(opt, split='train_3d')
         train_loader = DataLoader(
             training_data,
@@ -61,9 +62,9 @@ if __name__ == '__main__':
         scheduler = lr_scheduler.ReduceLROnPlateau(
             optimizer, 'min', patience=opt.lr_patience)
 
-    import pdb; pdb.set_trace()
 
     if not opt.no_val:
+        print('Setting up validation_loader')
         validation_data = get_data_set(opt, split='valid_3d')
         val_loader = DataLoader(
             validation_data,
@@ -85,6 +86,7 @@ if __name__ == '__main__':
             optimizer.load_state_dict(checkpoint['optimizer'])
 
     print('run')
+    import pdb; pdb.set_trace()
     for i in range(opt.begin_epoch, opt.n_epochs + 1):
         if not opt.no_train:
             train_epoch(i, train_loader, model, criterion, optimizer, opt,
@@ -97,6 +99,7 @@ if __name__ == '__main__':
             scheduler.step(validation_loss)
 
     if opt.test:
+        print('Setting up test_loader')
         test_data = get_data_set(opt, split='test_3d')
         test_loader = torch.utils.data.DataLoader(
             test_data,
