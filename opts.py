@@ -78,7 +78,8 @@ def parse_opts():
         help='Number of validation samples for each activity')
     parser.add_argument(
         '--resume_path',
-        default='save_model',
+        action='store_const',
+        const='save_model',
         type=str,
         help='Save data (.pth) of previous training')
     parser.add_argument(
