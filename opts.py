@@ -53,12 +53,12 @@ def parse_opts():
         help='Currently only support SGD')
     parser.add_argument(
         '--lr_patience',
-        default=10,
+        default=50,
         type=int,
         help='Patience of LR scheduler. See documentation of ReduceLROnPlateau.'
     )
     parser.add_argument(
-        '--batch_size', default=8, type=int, help='Batch Size')
+        '--batch_size', default=48, type=int, help='Batch Size')
     parser.add_argument(
         '--n_epochs',
         default=1000,
