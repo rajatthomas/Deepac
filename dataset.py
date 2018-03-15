@@ -31,7 +31,7 @@ class PAC_data(Dataset):
                     pdb.set_trace()
                 data[i_subj] = mask * (data_subj - mean_subj) / std_subj
 
-        self.data = torch.from_numpy(data)
+        self.data = torch.from_numpy(np.expand_dims(data, axis=1)).type(torch.FloatTensor)
 
         if split == 'train_3d':
             y_split = 'y_train'
