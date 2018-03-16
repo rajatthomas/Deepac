@@ -135,10 +135,13 @@ class ResNet(nn.Module):
             block, 512, layers[3], shortcut_type, stride=2)
 
         size_x, size_y, size_z = sample_size
-        last_z = int(math.ceil(size_z / 16))
-        last_x = int(math.ceil(size_x / 32))
+
+        last_x = int(math.ceil(size_x / 16))
+        last_y = int(math.ceil(size_y / 32))
+        last_z = int(math.ceil(size_z / 32))
+
         self.avgpool = nn.AvgPool3d(
-            (last_z, last_x, last_x), stride=1)
+            (last_x, last_y, last_z), stride=1)
         self.fc = nn.Linear(512 * block.expansion, num_classes)
 
         for m in self.modules():
@@ -184,11 +187,14 @@ class ResNet(nn.Module):
         x = self.layer3(x)
         x = self.layer4(x)
 
+        #s1 = x.shape
         x = self.avgpool(x)
-
+        #s2 = x.shape
         x = x.view(x.size(0), -1)
+        #s3 = x.shape
+        #import pdb; pdb.set_trace()
         x = self.fc(x)
-
+        #s4 = x.shape
         return x
 
 
