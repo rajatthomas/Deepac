@@ -27,8 +27,7 @@ class PAC_data(Dataset):
                 mean_subj = data_subj[mask].mean(axis=0)
                 std_subj = data_subj[mask].std(axis=0)
                 if np.any(std_subj == 0) or np.any(np.isnan(mean_subj)) or np.any(np.isnan(std_subj)):
-                    import pdb;
-                    pdb.set_trace()
+                    import pdb;pdb.set_trace()
                 data[i_subj] = mask * (data_subj - mean_subj) / std_subj
 
         self.data = torch.from_numpy(np.expand_dims(data, axis=1)).type(torch.FloatTensor)
@@ -40,7 +39,7 @@ class PAC_data(Dataset):
         if split == 'test_3d':
             y_split = 'y_test'
 
-        self.labels = torch.from_numpy(all_data[y_split])
+        self.labels = torch.from_numpy(all_data[y_split]).type(torch.LongTensor)
 
     def __len__(self):
         return self.data.shape[0]

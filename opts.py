@@ -5,17 +5,17 @@ def parse_opts():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--root_path',
-        default='/data_local/deeplearning/PAC_competition/numpy_data',
+        default='/data_local/deeplearning/DeepNeurologe/',  # '/data_local/deeplearning/PAC_competition/numpy_data',
         type=str,
         help='Root directory path of data')
     parser.add_argument(
         '--data_file',
-        default='data4mm.npz',
+        default='data_6mm.npz', # ''data_6mm.npz',  # 'data4mm.npz',
         type=str,
         help='Numpy binary file with train, test and validation datasets')
     parser.add_argument(
         '--result_path',
-        default='/data_local/deeplearning/PAC_competition/deep_results',
+        default='/data_local/deeplearning/DeepNeurologe/deep_results',  # ''/data_local/deeplearning/PAC_competition/deep_results',
         type=str,
         help='Result directory path')
     parser.add_argument(
@@ -27,11 +27,11 @@ def parse_opts():
     )
     parser.add_argument(
         '--image_size',
-        default=(45, 54, 45),
+        default=(30, 36, 30),  # (121, 145, 121), # (45, 54, 45),
         type=int,
         help='tuple of x-, y- and z- dimensions, e.g., (109, 91, 109)')
     parser.add_argument(
-        '--standardize', action='store_false', help='standardize across subject dimension')
+        '--standardize', action='store_true', help='standardize across subject dimension')
     parser.add_argument(
         '--learning_rate',
         default=0.1,
@@ -58,10 +58,10 @@ def parse_opts():
         help='Patience of LR scheduler. See documentation of ReduceLROnPlateau.'
     )
     parser.add_argument(
-        '--batch_size', default=48, type=int, help='Batch Size')
+        '--batch_size', default=20, type=int, help='Batch Size')
     parser.add_argument(
         '--n_epochs',
-        default=1000,
+        default=500,
         type=int,
         help='Number of total epochs to run')
     parser.add_argument(
@@ -88,7 +88,7 @@ def parse_opts():
         help='If true, validation is not performed.')
     parser.set_defaults(no_val=False)
     parser.add_argument(
-        '--test', action='store_true', help='If true, test is performed.')
+        '--test', action='store_false', help='If true, test is performed.')
     parser.set_defaults(test=False)
     parser.add_argument(
         '--test_subset',
