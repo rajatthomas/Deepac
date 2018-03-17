@@ -13,7 +13,7 @@ from dataset import get_data_set
 from utils import Logger
 from train import train_epoch
 from validation import val_epoch
-import test
+from test import test_epoch
 
 if __name__ == '__main__':
     opt = parse_opts()
@@ -99,7 +99,7 @@ if __name__ == '__main__':
         if not opt.no_train and not opt.no_val:
             scheduler.step(validation_loss)
 
-    if opt.test:
+    if not opt.no_test:
         print('Setting up test_loader')
         test_data = get_data_set(opt, split='test_3d')
         test_loader = torch.utils.data.DataLoader(
@@ -108,4 +108,8 @@ if __name__ == '__main__':
             shuffle=False,
             num_workers=opt.n_threads,
             pin_memory=True)
-        test.test(test_loader, model, opt, test_data.class_names)
+
+        test_logger = Logger(
+            os.path.join(opt.result_path, 'test.log'), ['loss', 'acc'])
+        test_loss = test_epoch(test_loader, model, criterion, opt,
+                               test_logger)
