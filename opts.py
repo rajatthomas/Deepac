@@ -5,17 +5,17 @@ def parse_opts():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--root_path',
-        default='/data_local/deeplearning/DeepNeurologe/',  # '/data_local/deeplearning/PAC_competition/numpy_data',
+        default='/data_local/deeplearning/PAC_competition/numpy_data', # '/data_local/deeplearning/DeepNeurologe/',  # '/data_local/deeplearning/PAC_competition/numpy_data',
         type=str,
         help='Root directory path of data')
     parser.add_argument(
         '--data_file',
-        default='data_6mm.npz', # ''data_6mm.npz',  # 'data4mm.npz',
+        default='data4mm.npz', # ''data_6mm.npz',  # 'data4mm.npz',
         type=str,
         help='Numpy binary file with train, test and validation datasets')
     parser.add_argument(
         '--result_path',
-        default='/data_local/deeplearning/DeepNeurologe/deep_results',  # ''/data_local/deeplearning/PAC_competition/deep_results',
+        default='/data_local/deeplearning/PAC_competition/deep_results', # '/data_local/deeplearning/DeepNeurologe/deep_results',  # ''/data_local/deeplearning/PAC_competition/deep_results',
         type=str,
         help='Result directory path')
     parser.add_argument(
@@ -27,7 +27,7 @@ def parse_opts():
     )
     parser.add_argument(
         '--image_size',
-        default=(30, 36, 30),  # (121, 145, 121), # (45, 54, 45),
+        default=(45, 54, 45),  # (30, 36, 30),  # (121, 145, 121), # (45, 54, 45),
         type=int,
         help='tuple of x-, y- and z- dimensions, e.g., (109, 91, 109)')
     parser.add_argument(
@@ -61,7 +61,7 @@ def parse_opts():
         '--batch_size', default=20, type=int, help='Batch Size')
     parser.add_argument(
         '--n_epochs',
-        default=500,
+        default=200,
         type=int,
         help='Number of total epochs to run')
     parser.add_argument(
@@ -131,7 +131,7 @@ def parse_opts():
         help='(resnet | preresnet | wideresnet | resnext | densenet | ')
     parser.add_argument(
         '--model_depth',
-        default=34,
+        default=50,
         type=int,
         help='Depth of resnet (10 | 18 | 34 | 50 | 101)')
     parser.add_argument(
