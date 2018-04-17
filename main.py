@@ -14,6 +14,8 @@ from utils import Logger
 from train import train_epoch
 from validation import val_epoch
 from test import test_epoch
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 if __name__ == '__main__':
     opt = parse_opts()
@@ -88,6 +90,29 @@ if __name__ == '__main__':
 
     print('run')
 
+    class EarlyStopping():
+        def __init__(self):
+            self.nsteps_similar_loss = 0
+            self.previous_loss = 9999.0
+            self.delta_loss = 0.001
+
+        def _increment_step(self):
+            self.nsteps_similar_loss += 1
+
+        def _reset(self):
+            self.nsteps_similar_loss = 0
+
+        def eval_loss(self, loss):
+            if (self.previous_loss - loss) <= self.delta_loss:
+                self._increment_step()
+            else:
+                self._reset()
+
+        def get_nsteps(self):
+            return self.nsteps_similar_loss
+
+    stop_criterion = EarlyStopping()
+
     for i in range(opt.begin_epoch, opt.n_epochs + 1):
         if not opt.no_train:
             train_epoch(i, train_loader, model, criterion, optimizer, opt,
@@ -95,6 +120,10 @@ if __name__ == '__main__':
         if not opt.no_val:
             validation_loss = val_epoch(i, val_loader, model, criterion, opt,
                                         val_logger)
+
+        stop_criterion.eval_loss(validation_loss)
+        if stop_criterion.get_nsteps() >= 10:
+            break
 
         if not opt.no_train and not opt.no_val:
             scheduler.step(validation_loss)
