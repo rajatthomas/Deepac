@@ -105,8 +105,10 @@ if __name__ == '__main__':
         def eval_loss(self, loss):
             if (self.previous_loss - loss) <= self.delta_loss:
                 self._increment_step()
+                self.previous_loss = loss
             else:
                 self._reset()
+                self.previous_loss = loss
 
         def get_nsteps(self):
             return self.nsteps_similar_loss

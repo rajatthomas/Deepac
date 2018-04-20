@@ -58,7 +58,7 @@ def parse_opts():
         help='Patience of LR scheduler. See documentation of ReduceLROnPlateau.'
     )
     parser.add_argument(
-        '--batch_size', default=8, type=int, help='Batch Size')
+        '--batch_size', default=14, type=int, help='Batch Size')
     parser.add_argument(
         '--n_epochs',
         default=200,
@@ -131,9 +131,9 @@ def parse_opts():
         help='(resnet | preresnet | wideresnet | resnext | densenet | ')
     parser.add_argument(
         '--model_depth',
-        default=101,
+        default=50,
         type=int,
-        help='Depth of resnet (10 | 18 | 34 | 50 | 101)')
+        help='Depth of resnet (10 | 18 | 34 | 50 | 101) Depth of densenet (121 | 169 | 201 | 264)')
     parser.add_argument(
         '--resnet_shortcut',
         default='B',
