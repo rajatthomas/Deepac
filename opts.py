@@ -10,7 +10,7 @@ def parse_opts():
         help='Root directory path of data')
     parser.add_argument(
         '--data_file',
-        default='data4mm.npz', # ''data_6mm.npz',  # 'data4mm.npz',
+        default='data.npz', # ''data_6mm.npz',  # 'data4mm.npz', # data.npz (data for PAC competition 2mm resolution)
         type=str,
         help='Numpy binary file with train, test and validation datasets')
     parser.add_argument(
@@ -27,7 +27,7 @@ def parse_opts():
     )
     parser.add_argument(
         '--image_size',
-        default=(45, 54, 45),  # (30, 36, 30),  # (121, 145, 121), # (45, 54, 45),
+        default=(121, 145, 121),  # (30, 36, 30),  # (121, 145, 121), # (45, 54, 45),
         type=int,
         help='tuple of x-, y- and z- dimensions, e.g., (109, 91, 109)')
     parser.add_argument(
@@ -58,10 +58,10 @@ def parse_opts():
         help='Patience of LR scheduler. See documentation of ReduceLROnPlateau.'
     )
     parser.add_argument(
-        '--batch_size', default=14, type=int, help='Batch Size')
+        '--batch_size', default=4, type=int, help='Batch Size')
     parser.add_argument(
         '--n_epochs',
-        default=200,
+        default=1000,
         type=int,
         help='Number of total epochs to run')
     parser.add_argument(
