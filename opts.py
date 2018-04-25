@@ -10,7 +10,7 @@ def parse_opts():
         help='Root directory path of data')
     parser.add_argument(
         '--data_file',
-        default='data.npz', # ''data_6mm.npz',  # 'data4mm.npz', # data.npz (data for PAC competition 2mm resolution)
+        default='data4mm.npz', # ''data_6mm.npz',  # 'data4mm.npz', # data.npz (data for PAC competition 2mm resolution)
         type=str,
         help='Numpy binary file with train, test and validation datasets')
     parser.add_argument(
@@ -27,7 +27,7 @@ def parse_opts():
     )
     parser.add_argument(
         '--image_size',
-        default=(121, 145, 121),  # (30, 36, 30),  # (121, 145, 121), # (45, 54, 45),
+        default=(45, 54, 45),  # (30, 36, 30),  # (121, 145, 121), # (45, 54, 45),
         type=int,
         help='tuple of x-, y- and z- dimensions, e.g., (109, 91, 109)')
     parser.add_argument(
@@ -126,12 +126,12 @@ def parse_opts():
         'If 1, range of inputs is [0-255]. If 255, range of inputs is [0-1].')
     parser.add_argument(
         '--model',
-        default='resnet',
+        default='densenet',
         type=str,
         help='(resnet | preresnet | wideresnet | resnext | densenet | ')
     parser.add_argument(
         '--model_depth',
-        default=50,
+        default=121,
         type=int,
         help='Depth of resnet (10 | 18 | 34 | 50 | 101) Depth of densenet (121 | 169 | 201 | 264)')
     parser.add_argument(

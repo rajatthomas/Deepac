@@ -142,7 +142,7 @@ class DenseNet(nn.Module):
 
     def __init__(self,
                  sample_size,
-                 sample_duration,
+                 sample_duration = 45,
                  growth_rate=32,
                  block_config=(6, 12, 24, 16),
                  num_init_features=64,
@@ -206,9 +206,13 @@ class DenseNet(nn.Module):
         features = self.features(x)
         out = F.relu(features, inplace=True)
         last_duration = int(math.ceil(self.sample_duration / 16))
-        last_size = int(math.floor(self.sample_size / 32))
+        #import pdb; pdb.set_trace()
+        size_x, size_y, size_z = self.sample_size
+        #last_size = int(math.floor(self.sample_size / 32))
+        last_size = int(math.floor(size_x / 32))
         out = F.avg_pool3d(
-            out, kernel_size=(last_duration, last_size, last_size)).view(
+            #out, kernel_size=(last_duration, last_size, last_size)).view(
+            out, kernel_size=(2, 1, 1)).view(
                 features.size(0), -1)
         out = self.classifier(out)
         return out
